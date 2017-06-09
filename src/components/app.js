@@ -14,11 +14,13 @@ constructor(props){
 componentWillMount(){
   //make concurrent requests and set state to response
   axios.all([this.fetchRecentCampers(),this.fetchallTimeCampers()])
-    .then(axios.spread(function(recentCampers , allTimeCampers){
+    .then(axios.spread((recentCampers , allTimeCampers) => {
+      //console.log(recentCampers);
       this.setState({
-        recentCampers,
-        allTimeCampers
-      })
+        recentCampers: recentCampers.data,
+        allTimeCampers: allTimeCampers.data
+      });
+          console.log(this.state);
     }));
 }
 
@@ -30,12 +32,17 @@ fetchallTimeCampers(){
   return axios.get('https://fcctop100.herokuapp.com/api/fccusers/top/alltime');
 }
 
+changeView(currentView){
+  this.setState({ currentView});
+}
+
+
   render() {
     return (
       <div>
-        <h2>Displaying Campers</h2>
-        <button className="btn btn-primary">Recent</button>
-        <button className="btn btn-primary">All Time</button>
+        <h2>{`Viewing Top ${this.state.currentView}`}</h2>
+        <button onClick={() => this.changeView('recentCampers')} className="btn btn-primary">Recent</button>
+        <button onClick={() => this.changeView('allTimeCampers')} className="btn btn-primary">All Time</button>
       </div>
     );
   }
