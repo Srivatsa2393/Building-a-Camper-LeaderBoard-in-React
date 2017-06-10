@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import CamplerList from './camper_list';
+
 export default class App extends Component {
 constructor(props){
   super(props);
@@ -43,6 +45,7 @@ changeView(currentView){
         <h2>{`Viewing Top ${this.state.currentView}`}</h2>
         <button onClick={() => this.changeView('recentCampers')} className="btn btn-primary">Recent</button>
         <button onClick={() => this.changeView('allTimeCampers')} className="btn btn-primary">All Time</button>
+        <CamplerList campers={this.state[this.state.currentView]}/>
       </div>
     );
   }
