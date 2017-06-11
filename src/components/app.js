@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MDSpinner from 'react-md-spinner';
 
 import CamplerList from './camper_list';
 
@@ -40,6 +41,9 @@ changeView(currentView){
 
 
   render() {
+    if (!this.state.recentCampers.length && !this.state.allTimeCampers.length){
+      return <MDSpinner className="spinner" size={100}/>
+    }
     return (
       <div>
         <h2>{`Viewing Top ${this.state.currentView}`}</h2>
