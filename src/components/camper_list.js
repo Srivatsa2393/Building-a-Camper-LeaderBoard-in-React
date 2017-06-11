@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import CamperListItem from './camper_list_item';
 
 const CamplerList = ({ campers }) => {
+  console.log(campers);
+  const Items = campers.map((camper, index) => {
+    return <CamperListItem key={index} camper={camper} number={index + 1} />
+  })
+
   //console.log('these are the props', props);
   //campers; //props.campers
     return(
@@ -14,7 +20,7 @@ const CamplerList = ({ campers }) => {
           </tr>
         </thead>
         <tbody>
-
+          {Items}
         </tbody>
       </table>
     )
